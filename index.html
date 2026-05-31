@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地震 HW10 - 震源機制解與 P 波初動</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-mesh"></div>
+    <main class="container">
+        <header>
+            <h1>🌍 震源機制解與 P 波初動</h1>
+            <p class="subtitle">互動式展示與手繪教學</p>
+        </header>
+
+        <section class="card stereonet-section">
+            <h2>互動式震源機制球 (Stereonet)</h2>
+            <div class="stereonet-container">
+                <canvas id="stereonetCanvas" width="400" height="400"></canvas>
+                <div class="controls">
+                    <div class="legend">
+                        <div class="legend-item">
+                            <span class="symbol compression">●</span> 壓縮 (Up / +)
+                        </div>
+                        <div class="legend-item">
+                            <span class="symbol dilatation">○</span> 膨脹 (Down / -)
+                        </div>
+                    </div>
+                    <div class="station-info" id="stationInfo">
+                        <p>將滑鼠游標移至測站點以查看詳細資訊</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid-2">
+            <section class="card">
+                <h2>✍️ 手動繪製訣竅</h2>
+                <div class="content-block">
+                    <p>震源機制球通常使用<strong>下半球等面積投影 (Schmidt net)</strong>。</p>
+                    <ol>
+                        <li><strong>大於 90° 的射出角 (反向投影)：</strong> 若 Take-off Angle (TOA) > 90°，代表射線往上射出。因為我們畫的是下半球，所以需要先反向投影：
+                            <br><br>
+                            <code>新方位角 (Az') = 原方位角 ± 180°</code><br>
+                            <code>新夾角 (TOA') = 180° - TOA</code>
+                        </li>
+                        <li><strong>決定方向 (方位角)：</strong> 把圓心當作基準，<strong>正上方為 0 度（正北）</strong>。順時針尋找 (例如 90度在右、180度在下)，這決定了你要從圓心往哪個方向走。</li>
+                        <li><strong>決定距離 (夾角)：</strong> <strong>圓心代表 0 度，圓周邊緣代表 90 度</strong>。從圓心沿著剛剛找到的方向往外側偏移。夾角越小越靠近圓心，夾角越大越靠近邊緣。<br><em>(口訣：「方位角」決定往哪走，「夾角」決定走多遠！)</em></li>
+                        <li><strong>標記極性：</strong> 在最後決定的位置畫上標記：
+                            <ul>
+                                <li><code>+</code> (壓縮, Up)：畫實心圖形 (●)</li>
+                                <li><code>-</code> (膨脹, Down)：畫空心圖形 (○)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>📖 震源機制球原理</h2>
+                <div class="content-block">
+                    <p>利用地震波 P波初動的「推」與「拉」來推測斷層錯動的方式：</p>
+                    <ul>
+                        <li><strong>壓縮區 (Compression, +)：</strong> 斷層錯動時，朝向測站推擠，造成 P 波初動向上。在地表上會形成兩個對角的象限。</li>
+                        <li><strong>膨脹區 (Dilatation, -)：</strong> 斷層錯動時，遠離測站拉扯，造成 P 波初動向下。這也形成兩個對角的象限。</li>
+                        <li><strong>斷層面與輔助面：</strong> 這兩個面互相垂直，將震源機制球分為四個象限。P 波初動解能幫助我們找出這兩個節面，但無法單從 P波 區分哪一個才是真正的斷層面。</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
